@@ -1,0 +1,53 @@
+-- --------------------------------------------------------
+-- Servidor:                     br-cdbr-azure-south-b.cloudapp.net
+-- Versão do servidor:           5.5.45-log - MySQL Community Server (GPL)
+-- OS do Servidor:               Win64
+-- HeidiSQL Versão:              9.4.0.5125
+-- --------------------------------------------------------
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET NAMES utf8 */;
+/*!50503 SET NAMES utf8mb4 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+
+-- Copiando estrutura para tabela fiscalizacao.FIS_LOCALIZACOES
+CREATE TABLE IF NOT EXISTS `FIS_LOCALIZACOES` (
+  `FISLOCA_ID` int(11) NOT NULL AUTO_INCREMENT,
+  `LATITUDE` decimal(10,8) NOT NULL,
+  `LONGITUDE` decimal(11,8) NOT NULL,
+  `PRECISAO` decimal(10,8) NOT NULL,
+  `DATA_CRIACAO` timestamp NULL,
+  `DESC_LOCAL` varchar(255) NOT NULL,
+  `DESC_OBSERVACAO` varchar(1000) DEFAULT NULL,
+  `INDR_TIPOLANCAMENTO` tinyint(4) NOT NULL,
+  `USUARIO_ID` int(11) NOT NULL,
+  PRIMARY KEY (`FISLOCA_ID`),
+  KEY `FK_FISCAL_USUARIO` (`USUARIO_ID`),
+  CONSTRAINT `FK_FISCAL_USUARIO` FOREIGN KEY (`USUARIO_ID`) REFERENCES `USUARIOS` (`USUARIO_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='TABELA ONDE SERA ARMAZENADA TODAS AS LOCALIZACOES QUE FORAM FISCALIZADAS PELA EMPRESA';
+
+-- Copiando dados para a tabela fiscalizacao.FIS_LOCALIZACOES: ~0 rows (aproximadamente)
+/*!40000 ALTER TABLE `FIS_LOCALIZACOES` DISABLE KEYS */;
+/*!40000 ALTER TABLE `FIS_LOCALIZACOES` ENABLE KEYS */;
+
+-- Copiando estrutura para tabela fiscalizacao.USUARIOS
+CREATE TABLE IF NOT EXISTS `USUARIOS` (
+  `USUARIO_ID` int(11) NOT NULL AUTO_INCREMENT,
+  `USER_NAME` varchar(255) NOT NULL,
+  `SENHA` varchar(255) NOT NULL,
+  PRIMARY KEY (`USUARIO_ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=12912 DEFAULT CHARSET=utf8 COMMENT='Tabela de usuarios extraida da empresa';
+
+-- Copiando dados para a tabela fiscalizacao.USUARIOS: ~1.595 rows (aproximadamente)
+/*!40000 ALTER TABLE `USUARIOS` DISABLE KEYS */;
+INSERT INTO `USUARIOS` (`USUARIO_ID`, `USER_NAME`, `SENHA`) VALUES
+    (10298, 'GLOPES', '971'),
+	(11161, 'CRSOUZA', '702'),
+	(1, 'MAUGUSTO', '741'),
+	(2, 'JQUEST', '091');
+/*!40000 ALTER TABLE `USUARIOS` ENABLE KEYS */;
+
+/*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
+/*!40014 SET FOREIGN_KEY_CHECKS=IF(@OLD_FOREIGN_KEY_CHECKS IS NULL, 1, @OLD_FOREIGN_KEY_CHECKS) */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
