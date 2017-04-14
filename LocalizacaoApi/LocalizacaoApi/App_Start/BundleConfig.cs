@@ -30,7 +30,6 @@ namespace LocalizacaoApi
                       "~/Content/site.css")
                       .Include("~/Content/font-awesome.css")
                       .Include("~/Content/bootstrap-social.css"));
-
         }
     }
 }
