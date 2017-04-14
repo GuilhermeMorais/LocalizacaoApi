@@ -27,6 +27,24 @@ namespace Services.Service
             inspecRepo = new InspectionRepository();
         }
 
+        /// <summary>
+        /// Find by id
+        /// </summary>
+        /// <param name="idUser">Id of User</param>
+        /// <param name="id">Id of inspection</param>
+        /// <returns>return founded inspection otherwise null.</returns>
+        public Inspection Find(int idUser, int id)
+        {
+            //todo unit tests.
+            var found = inspecRepo.Find(id);
+            if (found == null || found.UsuarioId != idUser)
+            {
+                return null;
+            }
+
+            return found;
+        }
+
         /// <summary>Initializes a new instance of the <see cref="ServiceOfInspection" /> class.</summary>
         /// <param name="inspecRepository">Inspection Repository</param>
         public ServiceOfInspection(IInspectionRepository inspecRepository)
@@ -39,7 +57,7 @@ namespace Services.Service
         ///  Get the list of <see cref="Inspection"/> by his <param name="idUser">User</param>, you can also ask by the <param name="page"> page number</param>.
         /// </summary>
         /// <returns>List of Inspections.</returns>
-        public IEnumerable<Inspection> GetLast(int idUser, int page = 1)
+        public IList<Inspection> GetLast(int idUser, int page = 1)
         {
             var all = inspecRepo.GetAllByUser(new User {Id = idUser});
             return all.Skip((page - 1) * SizeOfPage).Take(SizeOfPage).ToList();
@@ -123,16 +141,16 @@ namespace Services.Service
         /// Get a list of <see cref="Inspection"/> by his <param name="idUser">User</param>, after the <param name="inicial">Date</param> indicated.
         /// </summary>
         /// <returns>List of Inspections.</returns>
-        public IEnumerable<Inspection> GetAfterDate(int idUser, DateTime inicial)
+        public IList<Inspection> GetAfterDate(int idUser, DateTime inicial)
         {
-            return inspecRepo.GetAllByDates(new User { Id = idUser }, inicial, DateTime.Today);
+            return inspecRepo.GetAllByDates(new User { Id = idUser }, inicial, DateTime.Now);
         }
 
         /// <summary>
         /// Get all the <see cref="Inspection"/>s made the <param name="idUser">user</param>.
         /// </summary>
         /// <returns>List of Inspections.</returns>
-        public IEnumerable<Inspection> GetAll(int idUser)
+        public IList<Inspection> GetAll(int idUser)
         {
             return inspecRepo.GetAllByUser(new User {Id = idUser});
         }

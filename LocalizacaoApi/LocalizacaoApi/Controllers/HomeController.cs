@@ -6,11 +6,18 @@ using System.Web.Mvc;
 
 namespace LocalizacaoApi.Controllers
 {
+    /// <summary>
+    /// Home controller.
+    /// </summary>
     public class HomeController : Controller
     {
+        /// <summary>
+        /// Index Page.
+        /// </summary>
+        /// <returns></returns>
         public ActionResult Index()
         {
-            ViewBag.Title = "Home Page";
+            ViewBag.Title = "Localização Demo";
 
             return View();
         }

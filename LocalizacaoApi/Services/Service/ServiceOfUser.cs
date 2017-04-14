@@ -29,8 +29,9 @@ namespace Services.Service
         }
 
         /// <summary>
-        /// Get the Id by <param name="user">User Name</param> and his Password.
+        /// Get the Id by User Name and his Password.
         /// </summary>
+        /// <param name="user">User object filled with User Name and his Password</param>
         /// <returns>Return the Id of the <see cref="User"/> or -1 if not found.</returns>
         public User Verify(User user)
         {

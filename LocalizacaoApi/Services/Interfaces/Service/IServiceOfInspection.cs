@@ -10,10 +10,18 @@ namespace Services.Interfaces.Service
     public interface IServiceOfInspection
     {
         /// <summary>
+        /// Find by id
+        /// </summary>
+        /// <param name="idUser">Id of User</param>
+        /// <param name="id">Id of inspection</param>
+        /// <returns>return founded inspection otherwise null.</returns>
+        Inspection Find(int idUser, int id);
+
+        /// <summary>
         ///  Get the list of <see cref="Inspection"/> by his <param name="idUser">User</param>, you can also ask by the <param name="page"> page number</param>.
         /// </summary>
         /// <returns>List of Inspections.</returns>
-        IEnumerable<Inspection> GetLast(int idUser, int page = 1);
+        IList<Inspection> GetLast(int idUser, int page = 1);
 
         /// <summary>
         /// Add or Update the <param name="inspection">Inspection</param> received.
@@ -32,12 +40,12 @@ namespace Services.Interfaces.Service
         /// Get a list of <see cref="Inspection"/> by his <param name="idUser">User</param>, after the <param name="inicial">Date</param> indicated.
         /// </summary>
         /// <returns>List of Inspections.</returns>
-        IEnumerable<Inspection> GetAfterDate(int idUser, DateTime inicial);
+        IList<Inspection> GetAfterDate(int idUser, DateTime inicial);
 
         /// <summary>
         /// Get all the <see cref="Inspection"/>s made the <param name="idUser">user</param>.
         /// </summary>
         /// <returns>List of Inspections.</returns>
-        IEnumerable<Inspection> GetAll(int idUser);
+        IList<Inspection> GetAll(int idUser);
     }
 }

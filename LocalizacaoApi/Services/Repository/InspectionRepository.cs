@@ -25,7 +25,13 @@ namespace Services.Repository
         /// </summary>
         public InspectionRepository()
         {
-            db = new MySql.Data.MySqlClient.MySqlConnection(ConfigurationManager.ConnectionStrings["mysqlString"].ConnectionString);
+            var connectionString = ConfigurationManager.ConnectionStrings["mysqlString"];
+            if (connectionString == null)
+            {
+                throw new ArgumentNullException("mysqlString", "Connection Parameters not defined.");
+            }
+
+            db = new MySql.Data.MySqlClient.MySqlConnection(connectionString.ConnectionString);
         }
 
         /// <summary>
@@ -58,7 +64,7 @@ namespace Services.Repository
         public Inspection Find(int id)
         {
             var where = "WHERE FISLOCA_ID = @id";
-            return db.QuerySingle<Inspection>(DefaultSql + where, new {id});
+            return db.QuerySingleOrDefault<Inspection>(DefaultSql + where, new {id});
         }
 
         /// <summary>

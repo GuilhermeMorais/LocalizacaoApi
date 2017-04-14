@@ -243,6 +243,20 @@ namespace Services.Tests.Validations
         }
 
         [TestMethod, TestCategory("InspectionValidation")]
+        public void Update_should_validade_missing_TipoLancamento()
+        {
+            var obj = InspectionGood();
+            obj.TipoLancamento = EnumTipoLancamento.NoDefined;
+            var validador = new InspectionValidation(repo);
+            validador.UpdateChecks();
+
+            var result = validador.Validate(obj);
+            Assert.IsFalse(result.IsValid);
+            Assert.AreEqual(1, result.Errors.Count);
+            Assert.IsTrue(result.Errors.ToList().Exists(e => e.ErrorMessage == "O tipo do lançamento não foi identificado."));
+        }
+
+        [TestMethod, TestCategory("InspectionValidation")]
         public void Add_should_validade_today_date()
         {
             var obj = InspectionGood();

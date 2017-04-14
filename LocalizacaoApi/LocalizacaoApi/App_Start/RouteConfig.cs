@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
+#pragma warning disable 1591
 
 namespace LocalizacaoApi
 {

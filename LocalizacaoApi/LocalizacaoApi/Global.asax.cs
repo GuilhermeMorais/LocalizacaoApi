@@ -9,8 +9,14 @@ using System.Web.Routing;
 
 namespace LocalizacaoApi
 {
+    /// <summary>
+    /// Web Api Application
+    /// </summary>
     public class WebApiApplication : System.Web.HttpApplication
     {
+        /// <summary>
+        /// Application Start
+        /// </summary>
         protected void Application_Start()
         {
             AreaRegistration.RegisterAllAreas();

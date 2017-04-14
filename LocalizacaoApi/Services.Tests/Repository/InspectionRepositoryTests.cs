@@ -87,10 +87,10 @@ namespace Services.Tests.Repository
             {
                 var repo = new InspectionRepository();
                 var newFakeInspect = CreateFakeInspection();
-                newFakeInspect.Local = localCapeCanaveral;
-                newFakeInspect.Latitude = 28.4941382;
-                newFakeInspect.Longitude = -80.6958792;
-                newFakeInspect.Precisao = 4.5678;
+                newFakeInspect.Local      = localCapeCanaveral;
+                newFakeInspect.Latitude   = 28.4941382;
+                newFakeInspect.Longitude  = -80.6958792;
+                newFakeInspect.Precisao   = 4.5678;
                 newFakeInspect.Observacao = kennedySpaceCenter;
                 repo.Add(newFakeInspect);
                 newFakeInspect.Id.Should().NotBe(0);
@@ -121,9 +121,9 @@ namespace Services.Tests.Repository
                 var newFakeInspect = repo.Find(fakeInspec.Id);
                 newFakeInspect.Should().NotBeNull();
                 //Alter
-                newFakeInspect.Local = localAnoVouves;
-                newFakeInspect.Latitude = 35.4870762;
-                newFakeInspect.Longitude = 23.7847959;
+                newFakeInspect.Local      = localAnoVouves;
+                newFakeInspect.Latitude   = 35.4870762;
+                newFakeInspect.Longitude  = 23.7847959;
                 newFakeInspect.Observacao = obsOldestOliveTree;
                 repo.Update(newFakeInspect);
 
@@ -148,9 +148,9 @@ namespace Services.Tests.Repository
             //Prep
             RecreateFakeUserOnDb();
             var repo = new InspectionRepository();
-            var newFakeInspect = CreateFakeInspection();
-            newFakeInspect.Create = DateTime.Today.AddDays(-15);
-            newFakeInspect.Local = "Todelete";
+            var newFakeInspect        = CreateFakeInspection();
+            newFakeInspect.Create     = DateTime.Today.AddDays(-15);
+            newFakeInspect.Local      = "Todelete";
             newFakeInspect.Observacao = "ToDelete";
             repo.Add(newFakeInspect);
             newFakeInspect.Id.Should().NotBe(0);
@@ -179,14 +179,14 @@ namespace Services.Tests.Repository
         {
             return new Inspection
             {
-                Create = DateTime.Now,
-                Latitude = -16.6956874,
-                Longitude = -49.5844635,
-                Local = "Goiânia",
-                Observacao = "Great place to live.",
-                Precisao = 5,
+                Create         = DateTime.Now,
+                Latitude       = -16.6956874,
+                Longitude      = -49.5844635,
+                Local          = "Goiânia",
+                Observacao     = "Great place to live.",
+                Precisao       = 5,
                 TipoLancamento = EnumTipoLancamento.Manual,
-                UsuarioId = fakeUser.Id
+                UsuarioId      = fakeUser.Id
             };
         }
 

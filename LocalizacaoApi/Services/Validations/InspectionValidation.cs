@@ -1,5 +1,6 @@
 ﻿using System;
 using FluentValidation;
+using Services.Enums;
 using Services.Interfaces.Repository;
 using Services.Objects;
 using Services.Repository;
@@ -130,6 +131,10 @@ namespace Services.Validations
             RuleFor(x => x.Local)
                 .NotEmpty()
                 .WithMessage("O local deve ser informado.");
+
+            RuleFor(x => x.TipoLancamento)
+                .NotEqual(EnumTipoLancamento.NoDefined)
+                .WithMessage("O tipo do lançamento não foi identificado.");
         }
 
         private void ValidateDate()
