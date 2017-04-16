@@ -12,7 +12,7 @@ namespace Services.Repository
     /// <summary>
     /// Repository for Inspections.
     /// </summary>
-    public class InspectionRepository : IInspectionRepository
+    public class InspectionRepository : IInspectionRepository, IDisposable
     {
         private const string DefaultSql = "SELECT FISLOCA_ID AS Id, LATITUDE, LONGITUDE, PRECISAO, DATA_CRIACAO AS 'Create', DESC_LOCAL AS 'Local', DESC_OBSERVACAO AS Observacao, INDR_TIPOLANCAMENTO AS TipoLancamento, USUARIO_ID AS UsuarioId FROM FIS_LOCALIZACOES ";
         private const string InsertSql = "INSERT INTO FIS_LOCALIZACOES (LATITUDE,LONGITUDE,PRECISAO, DATA_CRIACAO, DESC_LOCAL, DESC_OBSERVACAO, INDR_TIPOLANCAMENTO, USUARIO_ID) VALUES(@Latitude, @Longitude, @Precisao, @Create, @Local, @Observacao, @TipoLancamento, @UsuarioId); SELECT LAST_INSERT_ID() ";
@@ -32,6 +32,13 @@ namespace Services.Repository
             }
 
             db = new MySql.Data.MySqlClient.MySqlConnection(connectionString.ConnectionString);
+        }
+
+        /// <summary>Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.</summary>
+        public void Dispose()
+        {
+            db?.Dispose();
+            db = null;
         }
 
         /// <summary>
