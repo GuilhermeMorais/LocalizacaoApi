@@ -3,5 +3,4 @@ configuration: Release
 
 # restore Nuget packages before running MSBuild
 before_build:
-  - nuget restore \Services\Services.csproj
-  - nuget restore LocalizacaoApi.sln
+  - nuget restore C:\projects\localizacaoapi\LocalizacaoApi\LocalizacaoApi.sln
