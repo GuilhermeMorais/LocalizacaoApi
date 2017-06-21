@@ -1,9 +1,9 @@
-﻿using System;
-using FluentValidation;
+﻿using FluentValidation;
 using Services.Enums;
 using Services.Interfaces.Repository;
 using Services.Objects;
 using Services.Repository;
+using System;
 
 namespace Services.Validations
 {
@@ -121,7 +121,7 @@ namespace Services.Validations
                 .WithMessage("A longitude deve ser informada.");
 
             RuleFor(x => x.Precisao)
-                .InclusiveBetween(0.00001f, 4.99f)
+                .InclusiveBetween(0.00001f, 24.99f)
                 .WithMessage("A precisão deve ser inferior a 5 metros.");
 
             RuleFor(x => x.Observacao)
