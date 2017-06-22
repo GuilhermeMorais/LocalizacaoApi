@@ -4,7 +4,9 @@ using LocalizacaoApi.Utilities;
 using Services.Interfaces.Service;
 using Services.Objects;
 using Services.Service;
+using Swashbuckle.Swagger.Annotations;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Web.Http;
@@ -47,7 +49,7 @@ namespace LocalizacaoApi.Controllers
         /// <response code="401">Missing Authentication token?</response>
         [Route("get/last")]
         [HttpGet]
-        [ResponseType(typeof(DtoInspection))]
+        [SwaggerResponse(HttpStatusCode.OK, "Return the list last inspections.", typeof(List<DtoInspection>))]
         public IHttpActionResult GetLast()
         {
             try
@@ -70,7 +72,7 @@ namespace LocalizacaoApi.Controllers
         /// <response code="401">Missing Authentication token?</response>
         [Route("get/page/{page:int}")]
         [HttpGet]
-        [ResponseType(typeof(DtoInspection))]
+        [SwaggerResponse(HttpStatusCode.OK, "Return the list last inspections by page.", typeof(List<DtoInspection>))]
         public IHttpActionResult GetByPage(int page = 1)
         {
             try
@@ -94,7 +96,7 @@ namespace LocalizacaoApi.Controllers
         /// <response code="401">Missing Authentication token?</response>
         [HttpGet]
         [Route("get/{id:long}")]
-        [ResponseType(typeof(DtoInspection))]
+        [SwaggerResponse(HttpStatusCode.OK, "Return the requested inspections.", typeof(DtoInspection))]
         public IHttpActionResult Get(int id)
         {
             try
@@ -125,7 +127,7 @@ namespace LocalizacaoApi.Controllers
         /// <response code="401">Missing Authentication token?</response>
         [HttpGet]
         [Route("get/beginning/{year}/{month}/{day}")]
-        [ResponseType(typeof(DtoInspection))]
+        [SwaggerResponse(HttpStatusCode.OK, "Return the list of inspections.", typeof(List<DtoInspection>))]
         public IHttpActionResult GetFrom(int year, int month, int day)
         {
             try
@@ -236,7 +238,7 @@ namespace LocalizacaoApi.Controllers
         /// <response code="401">Missing Authentication token?</response>
         [HttpGet]
         [Route("get/summary")]
-        [ResponseType(typeof(Tuple<DateTime, int>))]
+        [SwaggerResponse(HttpStatusCode.OK, "Return the quantity of inspections by date.", typeof(List<Tuple<DateTime, int>>))]
         public IHttpActionResult Summay()
         {
             try

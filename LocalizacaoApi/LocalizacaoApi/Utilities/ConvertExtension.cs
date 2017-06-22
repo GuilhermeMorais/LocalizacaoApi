@@ -46,8 +46,7 @@ namespace LocalizacaoApi.Utilities
                 TipoLancamento = inspection.TipoLancamento
             };
         }
-
-
+        
         /// <summary>
         /// Convert <see cref="DtoInspection"/> into <see cref="Inspection"/>.
         /// </summary>

@@ -3,9 +3,11 @@ using LocalizacaoApi.Models;
 using LocalizacaoApi.Utilities;
 using Services.Interfaces.Service;
 using Services.Service;
+using Swashbuckle.Swagger.Annotations;
 using System;
+using System.Collections.Generic;
+using System.Net;
 using System.Web.Http;
-using System.Web.Http.Description;
 
 namespace LocalizacaoApi.Controllers
 {
@@ -45,7 +47,7 @@ namespace LocalizacaoApi.Controllers
         /// <response code="500">Unexpected Error. (ops...)</response>
         [HttpGet]
         [Route("around/{latitude}/{longitude}/{distance}")]
-        [ResponseType(typeof(DtoConstructionSite))]
+        [SwaggerResponse(HttpStatusCode.OK, "Return the list of Construction sites founded.", typeof(List<DtoConstructionSite>))]
         public IHttpActionResult GetClosest(double latitude, double longitude, double distance)
         {
             try
