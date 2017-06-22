@@ -1,17 +1,14 @@
-﻿using System;
-using System.IO;
-using System.Linq;
-using System.Net;
-using System.Web;
-using System.Web.Http;
-using System.Web.Http.Description;
-using LocalizacaoApi.Filters;
+﻿using LocalizacaoApi.Filters;
 using LocalizacaoApi.Models;
 using LocalizacaoApi.Utilities;
-using Newtonsoft.Json;
 using Services.Interfaces.Service;
 using Services.Objects;
 using Services.Service;
+using System;
+using System.Linq;
+using System.Net;
+using System.Web.Http;
+using System.Web.Http.Description;
 
 namespace LocalizacaoApi.Controllers
 {
@@ -195,34 +192,6 @@ namespace LocalizacaoApi.Controllers
             return SaveInternal(model, update: true);
         }
 
-        private IHttpActionResult SaveInternal(DtoInspection dto, bool update = false)
-        {
-            try
-            {
-                var model = dto.ToObj();
-                model.UsuarioId = UserId;
-                model.Create = DateTime.Now;
-                service.Save(model);
-                dto.Id = model.Id;
-                dto.Create = model.Create;
-                var baseUrl = Request.RequestUri.AbsolutePath;
-                if (update)
-                {
-                    return Ok(dto);
-                }
-
-                return Created(baseUrl + "get/" + model.Id, dto);
-            }
-            catch (InvalidOperationException erro)
-            {
-                return BadRequest(erro.Message);
-            }
-            catch (Exception ex)
-            {
-                return DealWithThis(ex);
-            }
-        }
-
         /// <summary>
         /// Remove the inspection 
         /// <remarks>Only works if within 5 days after created.</remarks>
@@ -289,19 +258,32 @@ namespace LocalizacaoApi.Controllers
             }
         }
 
-        private IHttpActionResult DealWithThis(Exception exOriginal)
+        private IHttpActionResult SaveInternal(DtoInspection dto, bool update = false)
         {
-            var error = JsonConvert.SerializeObject(exOriginal);
-            var nameFile = UserName + "_" + DateTime.Now.ToString("O");
-            if (HttpContext.Current != null)
+            try
             {
-                var path = HttpContext.Current.Server.MapPath("~/App_Data/errors/" + nameFile + ".xml");
-                File.WriteAllText(path, error);
-                var ex = new Exception("See file " + nameFile + " for help.");
-                return InternalServerError(ex);
-            }
+                var model = dto.ToObj();
+                model.UsuarioId = UserId;
+                model.Create = DateTime.Now;
+                service.Save(model);
+                dto.Id = model.Id;
+                dto.Create = model.Create;
+                var baseUrl = Request.RequestUri.AbsolutePath;
+                if (update)
+                {
+                    return Ok(dto);
+                }
 
-            return InternalServerError(exOriginal);
+                return Created(baseUrl + "get/" + model.Id, dto);
+            }
+            catch (InvalidOperationException erro)
+            {
+                return BadRequest(erro.Message);
+            }
+            catch (Exception ex)
+            {
+                return DealWithThis(ex);
+            }
         }
     }
 }

@@ -39,6 +39,17 @@ CREATE TABLE IF NOT EXISTS `USUARIOS` (
   PRIMARY KEY (`USUARIO_ID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=12912 DEFAULT CHARSET=utf8 COMMENT='Tabela de usuarios extraida da empresa';
 
+
+-- Criando a tabela de obras.
+CREATE TABLE IF NOT EXISTS `OBRAS`(
+  `ID` int(11) NOT NULL,
+  `ENTIDADE` varchar(255) NOT NULL,
+  `LATITUDE` varchar(26) NOT NULL,
+  `LONGITUDE` varchar(26) NOT NULL,
+  `DESCRICAO` varchar(500),
+  `LOCAL`  varchar(500)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='TABELA ONDE SERA ARMAZENADA TODAS AS OBRAS';
+
 -- Copiando dados para a tabela fiscalizacao.USUARIOS: ~1.595 rows (aproximadamente)
 /*!40000 ALTER TABLE `USUARIOS` DISABLE KEYS */;
 INSERT INTO `USUARIOS` (`USUARIO_ID`, `USER_NAME`, `SENHA`) VALUES

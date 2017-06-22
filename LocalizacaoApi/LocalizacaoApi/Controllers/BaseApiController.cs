@@ -1,4 +1,8 @@
-﻿using System.Threading;
+﻿using Newtonsoft.Json;
+using System;
+using System.IO;
+using System.Threading;
+using System.Web;
 using System.Web.Http;
 
 namespace LocalizacaoApi.Controllers
@@ -41,6 +45,26 @@ namespace LocalizacaoApi.Controllers
 
                 return userId;
             }
+        }
+
+        /// <summary>
+        /// Deal with unexpected erros.
+        /// </summary>
+        /// <param name="exception">Exception occur.</param>
+        /// <returns>User friendly error.</returns>
+        protected IHttpActionResult DealWithThis(Exception exception)
+        {
+            var error = JsonConvert.SerializeObject(exception);
+            var nameFile = UserName + "_" + DateTime.Now.ToString("O");
+            if (HttpContext.Current != null)
+            {
+                var path = HttpContext.Current.Server.MapPath("~/App_Data/errors/" + nameFile + ".xml");
+                File.WriteAllText(path, error);
+                var ex = new Exception("See file " + nameFile + " for help.");
+                return InternalServerError(ex);
+            }
+
+            return InternalServerError(exception);
         }
 
         private void FillDetails()

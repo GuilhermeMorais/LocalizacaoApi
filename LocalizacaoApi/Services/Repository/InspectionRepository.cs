@@ -1,11 +1,11 @@
-﻿using System;
+﻿using Dapper;
+using Services.Interfaces.Repository;
+using Services.Objects;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Linq;
-using Dapper;
-using Services.Interfaces.Repository;
-using Services.Objects;
 
 namespace Services.Repository
 {
@@ -20,8 +20,9 @@ namespace Services.Repository
         private const string DeleteSql = "DELETE FROM FIS_LOCALIZACOES WHERE FISLOCA_ID = @Id";
         
         private IDbConnection db;
+
         /// <summary>
-        /// Constructor.
+        /// Constructor of Repository.
         /// </summary>
         public InspectionRepository()
         {
