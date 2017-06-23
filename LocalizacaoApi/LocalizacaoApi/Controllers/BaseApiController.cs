@@ -55,16 +55,29 @@ namespace LocalizacaoApi.Controllers
         protected IHttpActionResult DealWithThis(Exception exception)
         {
             var error = JsonConvert.SerializeObject(exception);
-            var nameFile = UserName + "_" + DateTime.Now.ToString("O");
+            var nameFile = UserName + "_" + DateTime.Now.ToString("yyyy-M-d-HH-mm-ss");
             if (HttpContext.Current != null)
             {
-                var path = HttpContext.Current.Server.MapPath("~/App_Data/errors/" + nameFile + ".xml");
+                var path = getRightPath(nameFile);
                 File.WriteAllText(path, error);
                 var ex = new Exception("See file " + nameFile + " for help.");
                 return InternalServerError(ex);
             }
 
             return InternalServerError(exception);
+        }
+
+        private string getRightPath(string nameFile)
+        {
+            var home = HttpContext.Current.Server.MapPath("~");
+            var pathDir = Path.Combine(home, "App_Data", "errors");
+
+            if (!Directory.Exists(pathDir))
+            {
+                Directory.CreateDirectory(pathDir);
+            }
+
+            return Path.Combine(pathDir, nameFile + ".json");
         }
 
         private void FillDetails()

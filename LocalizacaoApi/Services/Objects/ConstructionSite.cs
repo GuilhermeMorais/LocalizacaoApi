@@ -1,4 +1,5 @@
 ﻿using System.Device.Location;
+using System.Globalization;
 
 namespace Services.Objects
 {
@@ -43,8 +44,8 @@ namespace Services.Objects
         /// <returns>GeoCoordenation from the construction site</returns>
         public GeoCoordinate Coordinates()
         {
-            var latitude = double.Parse(Latitude) / 100000000;
-            var longitude = double.Parse(Longitude) / 100000000;
+            var latitude = double.Parse(Latitude, CultureInfo.InvariantCulture);
+            var longitude = double.Parse(Longitude, CultureInfo.InvariantCulture);
             return new GeoCoordinate(latitude, longitude);
         }
     }

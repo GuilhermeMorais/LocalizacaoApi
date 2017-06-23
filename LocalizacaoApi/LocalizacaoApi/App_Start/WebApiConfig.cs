@@ -1,9 +1,8 @@
-﻿using System.Linq;
+﻿using Newtonsoft.Json.Serialization;
+using System.Linq;
 using System.Net.Http.Formatting;
 using System.Web.Configuration;
 using System.Web.Http;
-using Newtonsoft.Json.Serialization;
-using WebApiContrib.Formatting.Jsonp;
 #pragma warning disable 1591
 
 namespace LocalizacaoApi
@@ -30,8 +29,8 @@ namespace LocalizacaoApi
                 jsonFormatter.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
 
                 ////JsonP (call from sites)
-                var formatter = new JsonpMediaTypeFormatter(jsonFormatter);
-                config.Formatters.Insert(0, formatter);
+                //var formatter = new JsonpMediaTypeFormatter(jsonFormatter);
+                //config.Formatters.Insert(0, formatter);
             }
 
             var usaHttps = WebConfigurationManager.AppSettings["usaHttps"];
