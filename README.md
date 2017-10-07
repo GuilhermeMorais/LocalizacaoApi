@@ -1,7 +1,7 @@
-# Project Location API
+# Project Location API [![Build status](https://ci.appveyor.com/api/projects/status/un4ae9gu737dl5an?svg=true)](https://ci.appveyor.com/project/GuilhermeMorais/localizacaoapi)
    This is a code which I made and donated to my actual work (this month: 04/2017). This API will let users using android to register their location during inspections of government constructions sites.
  Of course, the user repository was changed for security reasons.
-
+ 
 # Tables
 
 | *FIS_LOCALIZACAO* |*TYPE* | *Comments* |
