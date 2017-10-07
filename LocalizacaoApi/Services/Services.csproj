@@ -55,7 +55,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Constants.cs" />
     <Compile Include="Enums\EnumTipoLancamento.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Interfaces\Repository\IConstructionSiteRepository.cs" />
